@@ -14,7 +14,7 @@ class Signer
 	-- @tparam string signing_key 24-byte unique-enforced key for signing text
 	-- @tparam table opts
 	-- - `opts.separator: str = "!"` - separator for signed text
-	-- - `opts.digest_method: str = "sha512"` hashing algorithm
+	-- - `opts.digest_method: str = "sha512"` - hashing algorithm
 	-- @usage signer = Signer random_key!, separator: "."
 	--print signer\sign "hello world"
 	new: (signing_key, opts = {})=>

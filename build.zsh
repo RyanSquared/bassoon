@@ -6,5 +6,6 @@ for file in *.moon; do
 		[ $(stat $file) -gt $(stat ${file%.moon}.lua) ] && moonc $file
 	fi
 done
+ldoc .
 luarocks make --local
 busted -o plainTerminal .
