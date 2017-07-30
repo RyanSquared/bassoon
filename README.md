@@ -6,12 +6,20 @@ and a `util.random_key` function.
 
 ```moon
 import Signer from require "bassoon"
+import JWTSerializer from require "bassoon.jwt"
 import random_key from require "signer.util"
 
 signer = Signer random_key!, separator: ".", digest_method: "sha1"
 
 text = signer\sign "user=ryan"
 assert signer\verify(text) == "user=ryan"
+
+serializer = JWTSerializer!
+data = serializer\encode {
+	a: "b"
+	c: {"hello", "world"}
+} -- produces a JWT with tbe body as {"a": "b", "c": ["hello", "world"]}
+print table.concat serializer\decode data
 ```
 
 Basically, `signer\sign()` should be sent to a client, and `signer\verify()`
