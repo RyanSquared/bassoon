@@ -16,7 +16,8 @@ dependencies = {
 build = {
 	type = "builtin";
 	modules = {
-		["bassoon"] = "init.lua";
-		["bassoon.util"] = "util.lua";
+		["bassoon"] = "bassoon/init.lua";
+		["bassoon.util"] = "bassoon/util.lua";
+		["bassoon.jwt"] = "bassoon/jwt.lua";
 	};
 }
