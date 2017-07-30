@@ -3,8 +3,7 @@
 -- @classmod Signer
 -- @usage import Signer from require "bassoon"
 
-import to_base64, from_base64 from require "basexx"
-digest = require "openssl.digest"
+import to_url64 from require "basexx"
 hmac = require "openssl.hmac"
 
 import ensure_uniqueness from require "bassoon.util"
@@ -41,10 +40,18 @@ class Signer
 	-- @tparam string text Text to sign. Should not include `@separator`
 	-- @usage headers\set_cookie signer\sign "user=#{user}"
 	sign: (text)=>
-		hasher = digest.new @digest_method
 		signer = hmac.new @signing_key, @digest_method
-		"#{text}#{@separator}#{to_base64 signer\final hasher\final text}"
-	
+		"#{text}#{@separator}#{to_url64 signer\final text}"
+
+	--- Submethod used when verifying text without using @separator
+	-- @tparam text Text to be used for verification
+	-- @tparam signature Signature to match text
+	verify_text: (text, signature)=>
+		if @sign(text) == "#{text}#{@separator}#{signature}"
+			return text
+		else
+			return false
+
 	--- Verify that a text matches the resulting signature
 	-- @tparam string signed_text Text with signature
 	-- @see Signer\sign

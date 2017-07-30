@@ -1,9 +1,5 @@
-local to_base64, from_base64
-do
-  local _obj_0 = require("basexx")
-  to_base64, from_base64 = _obj_0.to_base64, _obj_0.from_base64
-end
-local digest = require("openssl.digest")
+local to_url64
+to_url64 = require("basexx").to_url64
 local hmac = require("openssl.hmac")
 local ensure_uniqueness
 ensure_uniqueness = require("bassoon.util").ensure_uniqueness
@@ -12,9 +8,15 @@ do
   local _class_0
   local _base_0 = {
     sign = function(self, text)
-      local hasher = digest.new(self.digest_method)
       local signer = hmac.new(self.signing_key, self.digest_method)
-      return tostring(text) .. tostring(self.separator) .. tostring(to_base64(signer:final(hasher:final(text))))
+      return tostring(text) .. tostring(self.separator) .. tostring(to_url64(signer:final(text)))
+    end,
+    verify_text = function(self, text, signature)
+      if self:sign(text) == tostring(text) .. tostring(self.separator) .. tostring(signature) then
+        return text
+      else
+        return false
+      end
     end,
     verify = function(self, signed_text)
       local pos = signed_text:find(self.separator, nil, true)
