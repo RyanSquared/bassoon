@@ -55,4 +55,4 @@ random_key = (opts = {})->
 		key = _random_key size
 		return key if ensure_uniqueness key
 
-return :ensure_uniqueness, :random_key, :_set_entropy_file
+return {:ensure_uniqueness, :random_key, :_set_entropy_file, :_random_key}

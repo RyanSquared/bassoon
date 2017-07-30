@@ -75,5 +75,6 @@ end
 return {
   ensure_uniqueness = ensure_uniqueness,
   random_key = random_key,
-  _set_entropy_file = _set_entropy_file
+  _set_entropy_file = _set_entropy_file,
+  _random_key = _random_key
 }
