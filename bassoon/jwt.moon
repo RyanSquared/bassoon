@@ -8,8 +8,6 @@ import from_url64, to_url64 from require "basexx"
 import Signer from require "bassoon"
 import random_key from require "bassoon.util"
 
-default_signer = Signer random_key!, separator: "."
-
 signers = {}
 
 _get_signer = (key, algo)->

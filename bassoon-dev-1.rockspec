@@ -2,7 +2,7 @@ package = "bassoon"
 version = "dev-1"
 
 source = {
-	url = "https://github.com/RyanSquared/bassoon";
+	url = "git+https://github.com/RyanSquared/bassoon";
 }
 
 description = {

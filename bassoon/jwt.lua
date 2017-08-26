@@ -9,9 +9,6 @@ local Signer
 Signer = require("bassoon").Signer
 local random_key
 random_key = require("bassoon.util").random_key
-local default_signer = Signer(random_key(), {
-  separator = "."
-})
 local signers = { }
 local _get_signer
 _get_signer = function(key, algo)
